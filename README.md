@@ -1,6 +1,6 @@
-## Image Grid Layout
+## GitHub Random Repository
 
-Roadmap project link: https://roadmap.sh/projects/github-random-repo/solutions?u=
+Roadmap project link: https://roadmap.sh/projects/github-random-repo/solutions?u=64b1bc4d5f038d81eeb4b894
 
 Roadmap project: https://roadmap.sh/projects/github-random-repo
 
