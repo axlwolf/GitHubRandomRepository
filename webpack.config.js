@@ -67,7 +67,14 @@ const CONFIG = {
       gifsicle: { optimizationLevel: 1 },
       svgo: {},
     }),
-    new Dotenv(), // Load .env file for local development
+    new Dotenv({
+      path: './.env', // Path to .env file
+      safe: false, // load .env.example if .env is missing
+      allowEmptyValues: true, // allow empty variables in .env file
+      systemvars: true, // load environment variables from OS
+      silent: true, // hide any errors
+      defaults: false // load .env.defaults file if it exists
+    }), // Load .env file for local development
     new webpack.DefinePlugin({
       'GH_TOKEN': JSON.stringify(process.env.GH_TOKEN), // CORRECTO: usa process.env.GH_TOKEN aquí
       'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV),
