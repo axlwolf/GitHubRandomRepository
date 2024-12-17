@@ -7,7 +7,6 @@ const HtmlReplaceWebpackPlugin = require("html-replace-webpack-plugin");
 const CopyWebpackPlugin = require("copy-webpack-plugin");
 const ImageminPlugin = require("imagemin-webpack-plugin").default;
 const MinifyPlugin = require("babel-minify-webpack-plugin");
-const Dotenv = require("dotenv-webpack");
 
 const devMode = process.env.NODE_ENV !== "production";
 
@@ -32,7 +31,7 @@ const CONFIG = {
     new HtmlReplaceWebpackPlugin([
       {
         pattern:
-          '<script type="text/javascript" src="../build/app.js"></script>',
+            '<script type="text/javascript" src="../build/app.js"></script>',
         replacement: "",
       },
       {
@@ -66,13 +65,6 @@ const CONFIG = {
       gifsicle: { optimizationLevel: 1 },
       svgo: {},
     }),
-    new Dotenv(), // Load .env file for local development
-    new webpack.DefinePlugin({
-      "process.env.GH_API_KEY": JSON.stringify(
-        process.env.GH_API_KEY || process.env.GH_API_KEY
-      ),
-      "process.env.NODE_ENV": JSON.stringify(process.env.NODE_ENV), //Important to keep this to detect production or development mode
-    }),
   ],
   module: {
     rules: [
@@ -81,6 +73,9 @@ const CONFIG = {
         use: [
           {
             loader: MiniCssExtractPlugin.loader,
+            // options: {
+            //   hmr: devMode,
+            // },
           },
           {
             loader: "css-loader",
