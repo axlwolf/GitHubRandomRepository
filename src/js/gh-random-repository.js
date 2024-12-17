@@ -10,7 +10,7 @@ export const GhRandomRepository = (() => {
   let dropdown;
   let currentRepo;
   const GITHUB_TOKEN =
-    "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"; //process.env.GH_API_KEY;
+    "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"; //process.env.GH_API_KEY;
 
   const init = async () => {
     dropdown = new CustomDropdown("#language-dropdown", {
