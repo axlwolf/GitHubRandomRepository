@@ -1,4 +1,4 @@
-import { CustomDropdown } from "./custom-dropdown";
+import {CustomDropdown} from "./custom-dropdown";
 
 export const GhRandomRepository = (() => {
   const repoContainer = document.querySelector("#repo-container");
@@ -9,8 +9,9 @@ export const GhRandomRepository = (() => {
 
   let dropdown;
   let currentRepo;
-  const GITHUB_TOKEN =
-    "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"; //process.env.GH_API_KEY;
+  let apiKey;
+  // const GITHUB_TOKEN =
+  //   "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"; //process.env.GH_API_KEY;
 
   const init = async () => {
     dropdown = new CustomDropdown("#language-dropdown", {
@@ -29,6 +30,8 @@ export const GhRandomRepository = (() => {
     refreshButton.addEventListener("click", fetchRandomRepo);
     await getLanguages();
     // await fetchRandomRepo(); // Fetch initial repo
+    apiKey = process.env.GH_TOKEN; // Acceso directo
+    console.log("API Key:", apiKey);
   };
 
   const getLanguages = async () => {
@@ -38,11 +41,9 @@ export const GhRandomRepository = (() => {
       const response = await fetch(languageApiURL);
       const data = await response.json();
 
-      const languages = data
-        .map((item, index) => (index !== 0 ? item.title : null))
-        .filter(Boolean);
-
-      dropdown.options.items = languages;
+      dropdown.options.items = data
+          .map((item, index) => (index !== 0 ? item.title : null))
+          .filter(Boolean);
       dropdown.render();
     } catch (error) {
       console.error("Error fetching languages:", error);
@@ -63,7 +64,7 @@ export const GhRandomRepository = (() => {
     try {
       const response = await fetch(apiUrl, {
         headers: {
-          Authorization: `token ${GITHUB_TOKEN}`, // Add token to headers
+          Authorization: `token ${apiKey}`, // Add token to headers
         },
       });
       if (!response.ok) {

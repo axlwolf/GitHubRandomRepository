@@ -7,6 +7,8 @@ const HtmlReplaceWebpackPlugin = require("html-replace-webpack-plugin");
 const CopyWebpackPlugin = require("copy-webpack-plugin");
 const ImageminPlugin = require("imagemin-webpack-plugin").default;
 const MinifyPlugin = require("babel-minify-webpack-plugin");
+const Dotenv = require('dotenv-webpack');
+
 
 const devMode = process.env.NODE_ENV !== "production";
 
@@ -64,6 +66,10 @@ const CONFIG = {
       jpegtran: { progressive: true },
       gifsicle: { optimizationLevel: 1 },
       svgo: {},
+    }),
+    new Dotenv(), // Load .env file for local development
+    new webpack.DefinePlugin({
+      'GH_TOKEN': JSON.stringify(process.env.GH_TOKEN), // Sin process.env en el nombre de la variable
     }),
   ],
   module: {
