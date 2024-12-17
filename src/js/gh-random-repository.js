@@ -31,10 +31,8 @@ export const GhRandomRepository = (() => {
 
     if (typeof GH_TOKEN !== 'undefined') { // Verifica si GH_TOKEN está definido (deploy)
       apiKey = GH_TOKEN;
-      console.log({local: false, apiKey})
     } else if (process.env.GH_TOKEN) { // Local con .env
       apiKey = process.env.GH_TOKEN;
-      console.log({local: true, apiKey})
     } else{
       console.error("No se ha encontrado la API Key, revisa la configuración.");
       displayError("No se ha encontrado la API Key, revisa la configuración.");
