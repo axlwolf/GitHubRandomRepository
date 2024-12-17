@@ -33,16 +33,16 @@ jobs:
       - name: Build
         run: npm run build
         env:
-          API_KEY: ${{ secrets.GH_TOKEN }} # Correct usage of the secret
-          NODE_ENV: production # Sets the environment to production
+          GH_TOKEN: ${{ secrets.GH_TOKEN }} # El nombre debe coincidir con el secreto en GitHub
+          NODE_ENV: production
 
       - name: Setup Pages
-        uses: actions/configure-pages@v3 # Use v3 for compatibility
+        uses: actions/configure-pages@v3
       - name: Upload artifact
-        uses: actions/upload-pages-artifact@v2 # Use v2 for compatibility
+        uses: actions/upload-pages-artifact@v2
         with:
-          path: './docs' # Path to your build output
+          path: './docs'
 
       - name: Deploy to GitHub Pages
         id: deployment
-        uses: actions/deploy-pages@v2 # Use v2 for compatibility
+        uses: actions/deploy-pages@v2

@@ -69,7 +69,8 @@ const CONFIG = {
     }),
     new Dotenv(), // Load .env file for local development
     new webpack.DefinePlugin({
-      'GH_TOKEN': JSON.stringify(process.env.GH_TOKEN), // Sin process.env en el nombre de la variable
+      'GH_TOKEN': JSON.stringify(process.env.GH_TOKEN), // CORRECTO: usa process.env.GH_TOKEN aquí
+      'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV),
     }),
   ],
   module: {

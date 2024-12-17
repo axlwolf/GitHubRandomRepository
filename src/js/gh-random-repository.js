@@ -10,8 +10,7 @@ export const GhRandomRepository = (() => {
   let dropdown;
   let currentRepo;
   let apiKey;
-  // const GITHUB_TOKEN =
-  //   "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"; //process.env.GH_API_KEY;
+  let GH_TOKEN;
 
   const init = async () => {
     dropdown = new CustomDropdown("#language-dropdown", {
@@ -29,9 +28,18 @@ export const GhRandomRepository = (() => {
 
     refreshButton.addEventListener("click", fetchRandomRepo);
     await getLanguages();
-    // await fetchRandomRepo(); // Fetch initial repo
-    apiKey = process.env.GH_TOKEN; // Acceso directo
-    console.log("API Key:", apiKey);
+
+    if (typeof GH_TOKEN !== 'undefined') { // Verifica si GH_TOKEN está definido (deploy)
+      apiKey = GH_TOKEN;
+      console.log({local: false, apiKey})
+    } else if (process.env.GH_TOKEN) { // Local con .env
+      apiKey = process.env.GH_TOKEN;
+      console.log({local: true, apiKey})
+    } else{
+      console.error("No se ha encontrado la API Key, revisa la configuración.");
+      displayError("No se ha encontrado la API Key, revisa la configuración.");
+      return;
+    }
   };
 
   const getLanguages = async () => {
